@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Sequelize, DataTypes } = require('sequelize');
 const cors = require('cors');
-
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -12,10 +12,10 @@ app.use(bodyParser.json());
 
 
 // Create Sequelize instance
-const sequelize = new Sequelize('tuf', 'tuf', 'Nandini@123', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: 'localhost',
+    dialect: 'mysql'
+  });
 
 // Define a model for code snippets
 const CodeSnippet = sequelize.define('CodeSnippet', {
